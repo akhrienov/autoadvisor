@@ -3,10 +3,5 @@
   "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": "error"
-  },
-  "overrides": [
-    {
-      "files": ["src/**/*"]
-    }
-  ]
+  }
 }
