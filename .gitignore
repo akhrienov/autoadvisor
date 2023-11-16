@@ -18,7 +18,12 @@
 
 # misc
 .DS_Store
+Thumbs.db
 *.pem
+
+# logs
+logs
+*.log
 
 # debug
 npm-debug.log*
@@ -34,3 +39,24 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# IDE/Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# temporary files
+tmp
+temp
+
+# OS generated files
+ehthumbs.db
+Icon?
+Desktop.ini
+
+# eSLint cache
+.eslintcache
+
+# prettier cache
+.prettiercache
