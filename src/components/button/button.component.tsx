@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { FC, ButtonHTMLAttributes, ReactNode } from 'react'
 
 import { ThemeColors } from '@/types'
 
@@ -14,19 +14,18 @@ const COLOR_MAP: Record<ThemeColors, string> = {
 }
 
 type ButtonProps = {
-  color: ThemeColors
-  children?: ReactNode
-}
+  themeColor: ThemeColors
+} & ButtonHTMLAttributes<HTMLButtonElement>
 
-const Button: FC<ButtonProps> = ({ color, children }) => {
+const Button: FC<ButtonProps> = ({ themeColor = ThemeColors.DEFAULT, children, ...props }) => {
   const layoutClasses: string = 'btn'
-  const finalClasses: string = `${layoutClasses} ${COLOR_MAP[color]}`
+  const finalClasses: string = `${layoutClasses} ${COLOR_MAP[themeColor]}`
 
-  return <button className={finalClasses}>{children}</button>
-}
-
-Button.defaultProps = {
-  color: ThemeColors.DEFAULT,
+  return (
+    <button className={finalClasses} {...props}>
+      {children}
+    </button>
+  )
 }
 
 export default Button

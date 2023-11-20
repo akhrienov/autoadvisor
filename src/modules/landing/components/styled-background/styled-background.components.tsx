@@ -1,4 +1,4 @@
-const Background = () => {
+const StyledBackground = () => {
   return (
     <>
       <svg
@@ -41,4 +41,4 @@ const Background = () => {
   )
 }
 
-export default Background
+export default StyledBackground

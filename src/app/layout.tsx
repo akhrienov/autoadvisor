@@ -2,6 +2,8 @@ import { ReactNode, FC } from 'react'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
+import { ReduxProvider } from '@/redux/provider'
+
 import '@/styles/globals.scss'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -40,8 +42,10 @@ export const metadata: Metadata = {
 
 const RootLayout: FC<RootLayoutProps> = ({ children }) => {
   return (
-    <html lang="en" data-theme="twilight">
-      <body className={inter.className}>{children}</body>
+    <html lang="en">
+      <body className={inter.className}>
+        <ReduxProvider>{children}</ReduxProvider>
+      </body>
     </html>
   )
 }

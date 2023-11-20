@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { FC, HTMLAttributes } from 'react'
 
 import { ThemeColors } from '@/types'
 
@@ -14,19 +14,18 @@ const COLOR_MAP: Record<ThemeColors, string> = {
 }
 
 type BadgeProps = {
-  color: ThemeColors
-  children?: ReactNode
-}
+  themeColor: ThemeColors
+} & HTMLAttributes<HTMLSpanElement>
 
-const Badge: FC<BadgeProps> = ({ color, children }) => {
+const Badge: FC<BadgeProps> = ({ themeColor = ThemeColors.DEFAULT, children, ...props }) => {
   const layoutClasses: string = 'rounded-full px-3 py-1 text-sm font-semibold leading-6 ring-1 ring-inset'
-  const finalClasses: string = `${layoutClasses} ${COLOR_MAP[color]}`
+  const finalClasses: string = `${layoutClasses} ${COLOR_MAP[themeColor]}`
 
-  return <span className={finalClasses}>{children}</span>
-}
-
-Badge.defaultProps = {
-  color: ThemeColors.DEFAULT,
+  return (
+    <span className={finalClasses} {...props}>
+      {children}
+    </span>
+  )
 }
 
 export default Badge
