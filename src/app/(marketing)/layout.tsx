@@ -1,9 +1,9 @@
 import { FC, ReactNode } from 'react'
 
-import GlobalLoader from '@/components/ui/loaders/global-loader'
+import GlobalLoader from '@/components/ui/loaders/global-loader/global-loader.component'
 
-import Navbar from '@/app/(marketing)/_components/navbar'
-import Footer from '@/app/(marketing)/_components/footer'
+import Navbar from '@/app/(marketing)/_components/navbar/navbar.component'
+import Footer from '@/app/(marketing)/_components/footer/footer.component'
 
 type MarketingLayoutProps = {
   children: ReactNode

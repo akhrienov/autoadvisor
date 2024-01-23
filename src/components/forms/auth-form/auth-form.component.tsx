@@ -1,30 +1,42 @@
-import { ArrowLongRightIcon } from '@heroicons/react/24/outline'
+import { useState, FC } from 'react'
+import { useRouter } from 'next/navigation'
 
-import Button, { ButtonColorScheme } from '@/components/ui/button'
-import { FacebookIcon, GoogleIcon } from '@/assets/media/icons'
+import SigningForm from '@/components/forms/auth-form/components/signing-form.component'
+import SignupForm from '@/components/forms/auth-form/components/signup-form.component'
 
-const AuthForm = () => {
+export enum AuthFormTypes {
+  SIGNING = 'signing',
+  SIGNUP = 'signup',
+}
+
+interface AuthFormProps {
+  allowToggle?: boolean
+  redirectTo?: string | null
+  defaultForm: AuthFormTypes
+}
+
+const AuthForm: FC<AuthFormProps> = ({ allowToggle = false, redirectTo = null, defaultForm }) => {
+  const router = useRouter()
+
+  const [activeForm, setActiveForm] = useState<AuthFormTypes>(defaultForm)
+
+  const handleFormToggle = (): void => {
+    if (allowToggle) {
+      activeForm === AuthFormTypes.SIGNING ? setActiveForm(AuthFormTypes.SIGNUP) : setActiveForm(AuthFormTypes.SIGNING)
+      return
+    }
+
+    if (redirectTo) router.push(redirectTo)
+  }
+
   return (
-    <>
-      <div>
-        <input type="text" placeholder="Email" className="input input-bordered mb-2 w-full" />
-        <Button colorScheme={ButtonColorScheme.SLATE_200} block>
-          <span className="font-bold text-button-dark">Sign up - it&apos;s free</span>
-          <ArrowLongRightIcon className="ml-2 h-5 w-5 text-button-dark" />
-        </Button>
-      </div>
-      <div className="divider text-sm">Or sign up with</div>
-      <div className="flex flex-col">
-        <Button colorScheme={ButtonColorScheme.SLATE_800} block>
-          <GoogleIcon className="h-5 w-5" />
-          <span className="font-bold text-button-light">Google</span>
-        </Button>
-        <Button colorScheme={ButtonColorScheme.SLATE_800} block>
-          <FacebookIcon className="h-5 w-5" />
-          <span className="font-bold text-button-light">Facebook</span>
-        </Button>
-      </div>
-    </>
+    <div className="flex flex-col gap-y-2 md:gap-y-4">
+      {activeForm === AuthFormTypes.SIGNING ? (
+        <SigningForm onToggleForm={handleFormToggle} />
+      ) : (
+        <SignupForm onToggleForm={handleFormToggle} />
+      )}
+    </div>
   )
 }
 
