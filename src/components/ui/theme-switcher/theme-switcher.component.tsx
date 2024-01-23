@@ -14,17 +14,12 @@ type ThemeSwitcherProps = {
 const ThemeSwitcher: FC<ThemeSwitcherProps> = ({ width = 5, height = 5, ...props }) => {
   const [isDark, setIsDark] = useState<boolean>(true)
 
-  useEffect(() => {
-    const localValue = localStorage.getItem('isDark')
-
-    if (localValue) {
-      setIsDark(localValue === 'true')
-    } else {
-      localStorage.setItem('isDark', String(isDark))
-    }
+  useEffect((): void => {
+    const localValue: string | null = localStorage.getItem('isDark')
+    localValue ? setIsDark(localValue === 'true') : setIsDark(false)
   }, [])
 
-  useEffect(() => {
+  useEffect((): void => {
     document.body.setAttribute('data-theme', isDark ? ThemeNames.TWILIGHT : ThemeNames.ILLUMINE)
   }, [isDark])
 
