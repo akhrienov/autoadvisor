@@ -5,12 +5,12 @@ type InitialState = {
 }
 
 export type CommonState = {
-  readonly globalLoaderActive: boolean
+  loading: boolean
 }
 
 const COMMON_INITIAL_STATE = {
   value: {
-    globalLoaderActive: true,
+    loading: true,
   } as CommonState,
 } as InitialState
 
@@ -18,11 +18,11 @@ export const commonSlice = createSlice({
   name: 'common',
   initialState: COMMON_INITIAL_STATE,
   reducers: {
-    switchGlobalLoaderToState: (state, action: PayloadAction<{ state: boolean }>): void => {
-      state.value.globalLoaderActive = action.payload.state
+    setGlobalLoaderState: (state, action: PayloadAction<{ state: boolean }>): void => {
+      state.value.loading = action.payload.state
     },
   },
 })
 
-export const { switchGlobalLoaderToState } = commonSlice.actions
+export const { setGlobalLoaderState } = commonSlice.actions
 export default commonSlice.reducer

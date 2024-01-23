@@ -1,21 +1,23 @@
 import { ReactNode, FC } from 'react'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Exo } from 'next/font/google'
+import { NextFont } from 'next/dist/compiled/@next/font'
 
 import { ReduxProvider } from '@/redux/provider'
 
-import '@/styles/globals.scss'
+import configs from '@/configs'
 
-const inter = Inter({ subsets: ['latin'] })
+import '@/styles/globals.scss'
 
 type RootLayoutProps = {
   children: ReactNode
 }
 
+const font: NextFont = Exo({ subsets: ['latin'], weight: ['400', '700'] })
+
 export const metadata: Metadata = {
-  title: 'AutoAdvisor | Connect with expert mechanics for real-time vehicle advice and solutions',
-  description:
-    'AutoAdvisor is a cutting-edge web application designed to seamlessly connect car owners with professional mechanics for online consultations',
+  title: `${configs.site.name} | ${configs.site.description.short}`,
+  description: configs.site.description.long,
   icons: {
     other: [
       {
@@ -43,7 +45,7 @@ export const metadata: Metadata = {
 const RootLayout: FC<RootLayoutProps> = ({ children }) => {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={font.className}>
         <ReduxProvider>{children}</ReduxProvider>
       </body>
     </html>
